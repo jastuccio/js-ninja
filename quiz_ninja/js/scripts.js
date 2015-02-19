@@ -6,14 +6,31 @@ var quiz = [
 
 var score = 0;
 
-for (var i = 0, max = quiz.length; i < max; i++) {
-    var answer = prompt( quiz [i] [0] );
-    if (answer === quiz [i] [1] ) {
-        alert("Correct!");
-        score ++;
-    } else {
-        alert("Nice try, but that is not the answer");
-    }
-}
+play(quiz);
 
-alert("Game Over, you scored " + score + " points");
+function play(quiz) {
+    for (var i = 0, question, answer, max = quiz.length; i < max; i++) {
+        question = quiz [i] [0];
+        answer = ask(question);
+        check(answer);
+    }
+
+    gameOver();
+
+    function ask(question) {
+      return prompt(question);
+    }
+
+    function check(answer) {
+        if (answer ===quiz [i] [1]){
+          alert("Correct!");
+          score++;
+        } else {
+          alert("Nice try, but that is not the answer");
+        }
+    }
+
+      function gameOver(){
+        alert("Game Over, you scored " + score + " points");
+      }
+}
