@@ -1,18 +1,3 @@
-//// view functions ////
-function update(element,content,klass) {
-    var p = element.firstChild || document.createElement("p");
-    p.textContent = content;
-    element.appendChild(p);
-    if(klass) {
-        p.className = klass;
-    }
-}
-
-//// dom references ////
-var $question = document.getElementById("question");
-var $score = document.getElementById("score");
-var $feedback = document.getElementById("feedback");
-
 var quiz = {
     "name": "Super Hero Name Quiz",
     "description": "How many super hereos can you name?",
@@ -30,13 +15,34 @@ var quiz = {
         "question": "Wonderwoman",
         "answer": "Dianna Prince"
     }]
+};
+
+//// dom references ////
+var $question = document.getElementById("question");
+var $score = document.getElementById("score");
+var $feedback = document.getElementById("feedback");
+var $start = document.getElementById("start");
+
+//// view functions ////
+function update(element,content,klass) {
+    var p = element.firstChild || document.createElement("p");
+    p.textContent = content;
+    element.appendChild(p);
+    if(klass) {
+        p.className = klass;
+    }
 }
 
-var score = 0;
+//// Event listeners
+$start.addEventListener('click', function() { play(quiz) }, false);
 
-play(quiz);
+//// function definitions ////
 
 function play(quiz) {
+    var score = 0;
+    update($score,score);
+
+
     for (var i = 0, question, answer, max = quiz.questions.length; i < max; i++) {
         question = quiz.questions[i].question;
         answer = ask(question);
@@ -56,7 +62,7 @@ function play(quiz) {
             score++;
             update($score,score)
         } else {
-            update($feedback, "Nice try, but that is not the answer","wrong");
+            update($feedback, "Nice try","Nice try");
         }
     }
 
