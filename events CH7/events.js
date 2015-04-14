@@ -10,6 +10,7 @@ dblclick.addEventListener("dblclick", highlight);
 function highlight (event) {
     event.target.classList.toggle("highlight");
 }
+
  mouse = document.getElementById("mouse");
  mouse.addEventListener("mouseover", highlight);
  mouse.addEventListener("mouseout", highlight);
